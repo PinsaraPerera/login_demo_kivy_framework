@@ -1,0 +1,132 @@
+WindowManager:
+    LoginWindow:
+    RegisterWindow:
+    User_details:
+
+<LoginWindow>
+    name: "login"
+    passw: passw
+    username: username
+
+
+    GridLayout:
+        cols: 1
+
+        GridLayout:
+            cols: 2
+
+            Label:
+                text: "User name: "
+            TextInput:
+                id: username
+                multiline: False
+
+            Label:
+                text: "Password: "
+            TextInput:
+                id: passw
+                multiline: False
+
+        Button:
+            text: "Login"
+            on_release:
+                root.manager.transition.direction = "right"
+                root.login_btn()
+
+        Button:
+            text: "Sign In"
+            on_release:
+                app.root.current = "register"
+                root.manager.transition.direction = "left"
+
+
+
+
+<RegisterWindow>
+    name: "register"
+    new_passw: new_passw
+    new_username: new_username
+    new_email: email
+
+
+    GridLayout:
+        cols: 1
+
+        GridLayout:
+            cols: 2
+
+            Label:
+                text: "Enter New Username: "
+            TextInput:
+                id: new_username
+                multiline: False
+
+            Label:
+                text: "Enter Your Email: "
+            TextInput:
+                id: email
+                multiline: False
+
+            Label:
+                text: "Enter New Password: "
+            TextInput:
+                id: new_passw
+                multiline: False
+
+        Button:
+            text: "Register me"
+            on_release:
+                root.manager.transition.direction = "right"
+                root.register_btn() if new_username.text != "" and new_passw.text != "" and email.text != "" else root.null_value_popup()
+
+
+        Button:
+            text: "Go to Login screen"
+            on_release:
+                new_username.text = ""
+                new_passw.text = ""
+                email.text = ""
+                app.root.current = "login"
+                root.manager.transition.direction = "right"
+
+<User_details>
+    name: "user"
+
+    GridLayout:
+        canvas.before:
+            BorderImage:
+                source: 'food.jpg'
+                pos: self.pos
+                size: self.size
+
+<Registration_successful>
+    Label:
+        text: "You have successfully created a Account.\n Enjoy the time here"
+        size_hint: 0.6,0.2
+        pos_hint: {"x":0.2, "top":0.7}
+
+<Registration_unsuccessful>
+    Label:
+        text: "The username you have inserted  is already exist.\n Try another username"
+        size_hint: 0.6,0.2
+        pos_hint: {"x":0.2, "top":0.7}
+
+    Button:
+        text: "Try again"
+        size_hint: 0.8,0.3
+        pos_hint: {"x":0.1, "y":0.1}
+
+
+<Invalid_popup>
+    Label:
+        text: "The password or username\n that you have entered is incorrect.\n please try again"
+        size_hint: 0.6,0.2
+        pos_hint: {"x":0.2, "top":0.7}
+
+<Null_value>
+    Label:
+        text: "All fields must be filled in a proper manner"
+        size_hint: 0.6,0.2
+        pos_hint: {"x":0.2, "top":0.7}
+
+
