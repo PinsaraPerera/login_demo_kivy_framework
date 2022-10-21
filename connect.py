@@ -7,5 +7,8 @@ db = mysql.connector.connect(
     database="appdata"
 )
 
+Q1 = "CREATE TABLE if not exists Users(user_name VARCHAR(50) PRIMARY KEY NOT NULL," \
+     " email VARCHAR(50) NOT NULL,password VARCHAR(8) NOT NULL, created datetime NOT NULL) "
+
 mycursor = db.cursor()
-# mycursor.execute("CREATE TABLE Users(user_name VARCHAR(50) PRIMARY KEY NOT NULL, email VARCHAR(50) NOT NULL,password VARCHAR(8) NOT NULL, created datetime NOT NULL) ")
+mycursor.execute(Q1)
